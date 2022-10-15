@@ -7,11 +7,14 @@ import (
 
 var db *gorm.DB
 
+// Tags are optional to use when declaring models. Refer the docs GORM supported tags:-
+// https://gorm.io/docs/models.html
 type Book struct {
 	gorm.Model
-	Name        string `gorm:""json:"name"`
-	Author      string `json:"author"`
-	Publication string `json:"publication"`
+	Name        string `json:"name" gorm:"default:My Book"`
+	Author      string `json:"author" gorm:"default:Linto Paul"`
+	Publication string `json:"publication" gorm:"default:Penguin"` 
+	Cost		int	   `json:"cost,omitempty"`
 }
 
 func init() {
@@ -22,8 +25,9 @@ func init() {
 
 func (b *Book) CreateBook() *Book {
 	db.NewRecord(b)
-	db.Create(&b)
-
+	// db.Debug().Create(&b) can be used for debugging
+	db.Create(&b) 
+	
 	return b
 }
 

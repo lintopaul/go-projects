@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/lintopaul/go-projects/go-bookstore/pkg/routes"
 )
 
@@ -14,5 +13,5 @@ func main() {
 	routes.RegisterBookStoreRoutes(r)
 
 	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe(":9010", r))
+	log.Fatal(http.ListenAndServe("localhost:9010", r))
 }
